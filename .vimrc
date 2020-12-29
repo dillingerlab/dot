@@ -38,6 +38,8 @@ set nobackup                            " Don't create annoying backup files
 set nowritebackup
 source $VIMRUNTIME/vimrc_example.vim    " Keep track of where a user leaves a file
 
+set spell
+set spell spelllang=en_us
 
 "Mapping/Keycodes
 ""---------------------------------------------------------------------------
