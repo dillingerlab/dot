@@ -72,3 +72,17 @@ if has("autocmd")
     autocmd BufNewFile *.py 0r ~/.vim/templates/python.sh
   augroup END
 endif
+
+
+" Notes
+""---------------------------------------------------------------------------
+"   >       indent
+"   <       indent
+" vim -p    tabbed vim
+" gt        next tab
+" gT        previous tab
+" dw        delete word
+" yw        yank word
+" :tabedit
+" :tabclose
+" :!        run command in bash ie :w, :! pytest
