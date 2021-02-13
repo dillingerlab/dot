@@ -51,3 +51,4 @@ done
 unset file
 
 export EDITOR='vim'
+HISTTIMEFORMAT="%F %T "
