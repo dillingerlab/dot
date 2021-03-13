@@ -70,6 +70,7 @@ let @q='6G4dd'
 if has("autocmd")
   augroup templates
     autocmd BufNewFile *.py 0r ~/.vim/templates/python.sh
+    autocmd BufNewFile *.sh 0r ~/.vim/templates/bash.sh
   augroup END
 endif
 
