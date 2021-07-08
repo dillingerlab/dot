@@ -14,5 +14,5 @@ alias sudo='sudo '
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # Python
-alias pytree="tree -I __pycache__"
+alias pytree="tree -I '__pycache__|*~"
 alias python=python3
