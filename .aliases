@@ -16,3 +16,4 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # Python
 alias pytree="tree -I '__pycache__|*~"
 alias python=python3
+alias virm="find . -name '*~' -delete"
