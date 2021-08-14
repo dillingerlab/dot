@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
-VIMBUNDLE=~/.vim/bundle
+VIMBUNDLE=$(HOME)/.vim/bundle
 
 
 $(VIMBUNDLE): ## Setup Vim Theme
@@ -10,8 +10,8 @@ $(VIMBUNDLE): ## Setup Vim Theme
 	sudo chown $$USER ~/.viminfo
 	sudo chgrp $$USER ~/.viminfo
 	( \
-        mkdir -p ~/.vim/autoload; \
-        mkdir -p ~/.vim/bundle; \
+        mkdir -p $(HOME)/.vim/autoload; \
+        mkdir -p $(HOME)/.vim/bundle; \
         curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim; \
 		git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale; \
 	)
@@ -37,6 +37,10 @@ tools:
 	sudo apt install tree
 	sudo apt install shellcheck
 	sudo apt install httpie
+	sudo apt install tmux
+	sudo apt install shellcheck
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+	nvm install node
 
 misc:
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
