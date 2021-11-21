@@ -30,7 +30,7 @@ dotfiles: ## Installs the dotfiles.
 git: ## Setup git
 	mkdir -p $(HOME)/.config/git
 	ln -sfn $(CURDIR)/ignore $(HOME)/.config/git/ignore
-	git config remote.origin.prune true
+	git config --global remote.origin.prune true
 
 
 tools:
