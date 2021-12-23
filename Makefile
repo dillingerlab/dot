@@ -27,6 +27,11 @@ dotfiles: ## Installs the dotfiles.
 	ln -snf $(CURDIR)/.bash_profile $(HOME)/.profile
 
 
+shell:
+	ln -sfn $(CURDIR)/.zshrc $(HOME)/.zshrc;
+	ln -sfn $(CURDIR)/.functions $(HOME)/.functions;
+	ln -sfn $(CURDIR)/.aliases $(HOME)/.aliases;
+
 git: ## Setup git
 	mkdir -p $(HOME)/.config/git
 	ln -sfn $(CURDIR)/ignore $(HOME)/.config/git/ignore
