@@ -1,14 +1,14 @@
-SHELL := /bin/bash
+SHELL := /bin/zsh
 
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
-
+GROUP=$(shell id -gn)
 
 $(VIMBUNDLE): ## Setup Vim Theme
-	sudo touch ~/.viminfo
-	sudo chown $$USER ~/.viminfo
-	sudo chgrp $$USER ~/.viminfo
+	touch ~/.viminfo
+	chown $$USER ~/.viminfo
+	chgrp $(GROUP) ~/.viminfo
 	( \
         mkdir -p $(HOME)/.vim/autoload; \
         mkdir -p $(HOME)/.vim/bundle; \
@@ -16,6 +16,9 @@ $(VIMBUNDLE): ## Setup Vim Theme
 		git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale; \
 	)
 	cp -r $(CURDIR)/templates $(HOME)/.vim/
+
+vim:
+	$(MAKE) $(VIMBUNDLE)
 
 
 dotfiles: ## Installs the dotfiles.
