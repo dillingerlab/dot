@@ -3,19 +3,20 @@ SHELL := /bin/zsh
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
-GROUP=$(shell id -gn)
+
 
 $(VIMBUNDLE): ## Setup Vim Theme
-	touch ~/.viminfo
-	chown $$USER ~/.viminfo
-	chgrp $(GROUP) ~/.viminfo
+	touch $(HOME)/.viminfo
+	mkdir $(HOME)/.vim/undodir
 	( \
         mkdir -p $(HOME)/.vim/autoload; \
         mkdir -p $(HOME)/.vim/bundle; \
         curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim; \
 		git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale; \
 	)
-	cp -r $(CURDIR)/templates $(HOME)/.vim/
+	cp -r $(CURDIR)/templates $(HOME)/.vim/;
+	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
+
 
 vim:
 	$(MAKE) $(VIMBUNDLE)
@@ -34,6 +35,8 @@ shell:
 	ln -sfn $(CURDIR)/.zshrc $(HOME)/.zshrc;
 	ln -sfn $(CURDIR)/.functions $(HOME)/.functions;
 	ln -sfn $(CURDIR)/.aliases $(HOME)/.aliases;
+	ln -sfn $(CURDIR)/mac_vimrc $(HOME)/.vimrc;
+
 
 git: ## Setup git
 	mkdir -p $(HOME)/.config/git
