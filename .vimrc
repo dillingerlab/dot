@@ -38,6 +38,8 @@ set nobackup                            " Don't create annoying backup files
 set nowritebackup
 set undofile                            " Maintain undo history between sessions
 set undodir=~/.vim/undodir
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim    " Keep track of where a user leaves a file
 
 set spell
 set spell spelllang=en_us
