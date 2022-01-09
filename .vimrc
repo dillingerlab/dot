@@ -46,6 +46,7 @@ set spell spelllang=en_us
 
 "Mapping/Keycodes
 ""---------------------------------------------------------------------------
+nnoremap Y y$
 
 
 "Visuals
