@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
