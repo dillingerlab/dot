@@ -1,4 +1,4 @@
-SHELL := /bin/zsh
+SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
@@ -7,13 +7,11 @@ VIMBUNDLE=$(HOME)/.vim/bundle
 
 $(VIMBUNDLE): ## Setup Vim Theme
 	touch $(HOME)/.viminfo
-	mkdir $(HOME)/.vim/undodir
-	( \
-        mkdir -p $(HOME)/.vim/autoload; \
-        mkdir -p $(HOME)/.vim/bundle; \
-        curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim; \
-		git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale; \
-	)
+	mkdir -p $(HOME)/.vim/undodir
+	mkdir -p $(HOME)/.vim/autoload
+	mkdir -p $(HOME)/.vim/bundle
+	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim;
+	git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale;
 	cp -r $(CURDIR)/templates $(HOME)/.vim/;
 	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
 
