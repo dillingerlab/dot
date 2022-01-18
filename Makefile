@@ -35,8 +35,6 @@ shell:
 
 
 git: ## Setup git
-	mkdir -p $(HOME)/.config/git
-	ln -sfn $(CURDIR)/ignore $(HOME)/.config/git/ignore
 	git config --global remote.origin.prune true
 
 
