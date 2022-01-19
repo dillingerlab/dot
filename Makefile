@@ -38,15 +38,14 @@ git: ## Setup git
 	git config --global remote.origin.prune true
 
 
-tools:
-	sudo apt install dos2unix
-	sudo apt install tree
-	sudo apt install shellcheck
-	sudo apt install httpie
-	sudo apt install tmux
-	sudo apt install shellcheck
+node:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 	nvm install node
+
+
+tools:
+	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
+
 
 misc:
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
