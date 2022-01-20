@@ -36,6 +36,7 @@ shell:
 
 git: ## Setup git
 	git config --global remote.origin.prune true
+	git config --global alias.lease 'push --force-with-lease'
 
 
 node:
