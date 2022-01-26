@@ -36,6 +36,8 @@ shell:
 
 git: ## Setup git
 	git config --global remote.origin.prune true
+	git config --global log.abbrevCommit true
+	git config --global core.abbrev 8
 	git config --global alias.lease 'push --force-with-lease'
 
 
