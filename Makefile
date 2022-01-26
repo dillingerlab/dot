@@ -8,8 +8,9 @@ $(VIMBUNDLE): ## Setup Vim Theme
 	mkdir -p $(HOME)/.vim/undodir
 	mkdir -p $(HOME)/.vim/autoload
 	mkdir -p $(HOME)/.vim/bundle
-	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim;
-	git clone https://github.com/dense-analysis/ale.git ~/.vim/bundle/ale;
+	curl -LSso $(HOME)/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim;
+	git clone https://github.com/dense-analysis/ale.git $(HOME)/.vim/bundle/ale;
+	git clone https://github.com/preservim/nerdtree.git $(HOME)/.vim/bundle/nerdtree;
 	cp -r $(CURDIR)/templates $(HOME)/.vim/;
 	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
 
