@@ -40,3 +40,6 @@ setopt PROMPT_SUBST
 export PS1="%D{%H:%M:%S} %1~\$(parse_git_branch) %(?.√.?%?) "
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 setopt HIST_IGNORE_DUPS
+source /usr/local/share/chruby/chruby.sh
+autoload -Uz compinit && compinit
+chruby-3.1.1
