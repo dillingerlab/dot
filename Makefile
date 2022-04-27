@@ -47,6 +47,10 @@ node:
 	nvm install node
 
 
+ruby:
+	brew install chruby
+
+
 tools:
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
 

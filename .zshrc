@@ -42,4 +42,4 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 setopt HIST_IGNORE_DUPS
 source /usr/local/share/chruby/chruby.sh
 autoload -Uz compinit && compinit
-chruby-3.1.1
+chruby ruby-3.1.1
