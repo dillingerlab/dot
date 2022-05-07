@@ -72,6 +72,10 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 "Mapping/Keycodes
 ""---------------------------------------------------------------------------
 nnoremap Y y$
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 
 "Visuals
