@@ -53,6 +53,7 @@ ruby:
 
 tools:
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
+	brew install direnv
 
 
 misc:
