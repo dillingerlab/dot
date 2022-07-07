@@ -45,7 +45,7 @@ git: ## Setup git
 
 node:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-	nvm install node
+	$(HOME)/.nvm/nvm install node
 
 
 ruby:
