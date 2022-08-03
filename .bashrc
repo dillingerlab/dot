@@ -51,6 +51,5 @@ done
 unset file
 
 export EDITOR='vim'
-export MANPAGER="vim -c +MANPAGER -"
 HISTTIMEFORMAT="%F %T "
 export HIST_IGNORE_DUPS
