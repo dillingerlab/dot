@@ -45,6 +45,10 @@ source $VIMRUNTIME/defaults.vim    " Keep track of where a user leaves a file
 
 set spell
 set spell spelllang=en_us
+" ]s - next
+" [s - previous
+" zg - add to dictionary
+" z= - suggest spelling
 
 " Start NERDTree and leave the cursor in it.
 autocmd VimEnter * NERDTree
