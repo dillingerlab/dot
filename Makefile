@@ -48,6 +48,11 @@ node:
 	$(HOME)/.nvm/nvm install node
 
 
+aws:
+	npm install -g aws-cdk
+	curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+	sudo installer -pkg AWSCLIV2.pkg -target /
+
 ruby:
 	brew install chruby
 
