@@ -40,12 +40,12 @@ setopt PROMPT_SUBST
 export PS1="%D{%H:%M:%S} %1~\$(parse_git_branch) %(?.√.?%?) "
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 setopt HIST_IGNORE_DUPS
-source /usr/local/share/chruby/chruby.sh
 autoload -Uz compinit && compinit
-chruby ruby-3.1.1
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+chruby ruby-3.2.0
 
 export PATH=/usr/local/bin:$PATH

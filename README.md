@@ -1,4 +1,5 @@
-
+install homebrew
+install iterm2
 
 TODO:
 Find way to append following to `.gitconfig`:

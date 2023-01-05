@@ -54,8 +54,15 @@ aws:
 	sudo installer -pkg AWSCLIV2.pkg -target /
 
 ruby:
+	brew install ruby-install
+	ruby-install 3.2.0
 	brew install chruby
-
+	$( \
+	        source /opt/homebrew/opt/chruby/share/chruby/chruby.sh \
+	        chruby ruby-3.2.0 \
+	)
+	echo source /opt/homebrew/opt/chruby/share/chruby/chruby.sh >> $(HOME)/.zshrc
+	echo chruby ruby-3.2.0 >> $(HOME)/.zshrc
 
 tools:
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
