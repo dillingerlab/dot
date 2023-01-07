@@ -28,13 +28,6 @@ dotfiles: ## Installs the dotfiles.
 	ln -snf $(CURDIR)/.bash_profile $(HOME)/.profile
 
 
-shell:
-	ln -sfn $(CURDIR)/.zshrc $(HOME)/.zshrc;
-	ln -sfn $(CURDIR)/.functions $(HOME)/.functions;
-	ln -sfn $(CURDIR)/.aliases $(HOME)/.aliases;
-	ln -sfn $(CURDIR)/mac_vimrc $(HOME)/.vimrc;
-
-
 git: ## Setup git
 	git config --global remote.origin.prune true
 	git config --global log.abbrevCommit true
@@ -53,20 +46,9 @@ aws:
 	curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 	sudo installer -pkg AWSCLIV2.pkg -target /
 
-ruby:
-	brew install ruby-install
-	ruby-install 3.2.0
-	brew install chruby
-	$( \
-	        source /opt/homebrew/opt/chruby/share/chruby/chruby.sh \
-	        chruby ruby-3.2.0 \
-	)
-	echo source /opt/homebrew/opt/chruby/share/chruby/chruby.sh >> $(HOME)/.zshrc
-	echo chruby ruby-3.2.0 >> $(HOME)/.zshrc
 
 tools:
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
-	brew install direnv
 
 
 misc:
