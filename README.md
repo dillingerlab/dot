@@ -1,3 +1,4 @@
+Mostly assembled from https://github.com/jessfraz/dotfiles
 install homebrew
 install iterm2
 
