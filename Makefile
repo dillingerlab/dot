@@ -54,6 +54,10 @@ tools:
 misc:
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
 
+python:
+	sudo apt install python3.10
+	sudo apt install python3.10-venv
+
 
 all:
 	$(MAKE) dotfiles
