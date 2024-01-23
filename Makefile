@@ -41,6 +41,9 @@ node:
 	$(HOME)/.nvm/nvm install node
 
 
+direnv:
+	curl -sfL https://direnv.net/install.sh | bash
+
 aws:
 	npm install -g aws-cdk
 	curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
