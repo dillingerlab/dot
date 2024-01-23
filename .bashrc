@@ -53,3 +53,4 @@ unset file
 export EDITOR='vim'
 HISTTIMEFORMAT="%F %T "
 export HIST_IGNORE_DUPS
+eval "$(direnv hook bash)"
