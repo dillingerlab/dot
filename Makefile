@@ -34,6 +34,8 @@ git: ## Setup git
 	git config --global core.abbrev 8
 	git config --global alias.lease 'push --force-with-lease'
 	git config --global init.defaultBranch main
+	git config --global push.autoSetupRemote true
+	git config --global advice.skippedCherryPicks false
 
 
 node:
