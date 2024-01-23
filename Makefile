@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
@@ -52,8 +53,17 @@ aws:
 	sudo installer -pkg AWSCLIV2.pkg -target /
 
 
+make java:
+	curl -s "https://get.sdkman.io" | bash
+	( \
+		source "$(HOME)/.sdkman/bin/sdkman-init.sh"; \
+		sdk install java 21.0.2-zulu; \
+		sdk use java 21.0.2-zulu; \
+	)
+
+
 tools:
-	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck
+	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
 
 
 misc:
