@@ -54,3 +54,4 @@ export EDITOR='vim'
 HISTTIMEFORMAT="%F %T "
 export HIST_IGNORE_DUPS
 eval "$(direnv hook bash)"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
