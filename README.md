@@ -15,6 +15,9 @@ re2 = rebase -i HEAD~2
 ruby:
 	git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 	git clone https://github.com/rbenv/ruby-build.git $(HOME)/plugins/ruby-build
+    # restart shell
+    rbenv install 3.3.1
+    rbenv global 3.3.1
 ```
 
 # Windows Improvements
