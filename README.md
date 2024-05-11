@@ -10,5 +10,12 @@ last = log -1 HEAD
 re2 = rebase -i HEAD~2
 ```
 
+# Ruby - PITA
+```
+ruby:
+	git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+	git clone https://github.com/rbenv/ruby-build.git $(HOME)/plugins/ruby-build
+```
+
 # Windows Improvements
 - [Map Caps Lock to Right Control Key](https://superuser.com/questions/949385/map-capslock-to-control-in-windows-10)
