@@ -74,6 +74,10 @@ python:
 	sudo apt install python3.10-venv
 
 
+rust:
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
 all:
 	$(MAKE) dotfiles
 	$(MAKE) $(VIMBUNDLE)

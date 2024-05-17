@@ -18,3 +18,4 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
 # Added by `rbenv init` on Sat May 11 10:47:00 MDT 2024
 eval "$(~/.rbenv/bin/rbenv init - bash)"
+. "$HOME/.cargo/env"
