@@ -19,6 +19,22 @@ $(VIMBUNDLE): ## Setup Vim Theme
 vim:
 	$(MAKE) $(VIMBUNDLE)
 
+nvim:
+	sudo apt install gcc
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+	sudo rm -rf /usr/bin/nvim
+	sudo tar -C /usr/bin -xzf nvim-linux64.tar.gz
+	rm -rf $(CURDIR)/nvim-linux64.tar.gz
+	git clone https://github.com/LazyVim/starter ~/.config/nvim
+	rm -rf ~/.config/nvim/.git
+	( \
+		LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*'); \
+		curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"; \
+		tar xf lazygit.tar.gz lazygit; \
+	)
+	sudo install lazygit /usr/local/bin
+	sudo apt-get install ripgrep
+	git config --global core.editor nvim
 
 dotfiles: ## Installs the dotfiles.
 	# add aliases for dotfiles
@@ -54,6 +70,7 @@ aws:
 
 
 make java:
+	sudo apt install unzip
 	curl -s "https://get.sdkman.io" | bash
 	( \
 		source "$(HOME)/.sdkman/bin/sdkman-init.sh"; \
@@ -69,9 +86,9 @@ tools:
 misc:
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
 
+
 python:
-	sudo apt install python3.10
-	sudo apt install python3.10-venv
+	curl https://pyenv.run | bash
 
 
 rust:

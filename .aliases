@@ -18,3 +18,4 @@ alias pytree="tree -I '__pycache__|*~'"
 alias python=python3
 alias virm="find . -name '*~' -delete"
 alias pip=pip3
+alias vim=nvim
