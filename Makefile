@@ -16,10 +16,10 @@ $(VIMBUNDLE): ## Setup Vim Theme
 	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
 
 
-vim:
+vim:  # vim
 	$(MAKE) $(VIMBUNDLE)
 
-nvim:
+nvim:  # Almost complete neovim + lazyvim
 	sudo apt install gcc
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 	sudo rm -rf /usr/bin/nvim
@@ -37,8 +37,7 @@ nvim:
 	git config --global core.editor nvim
 	cargo install fd-find
 
-dotfiles: ## Installs the dotfiles.
-	# add aliases for dotfiles
+dotfiles: ## dotfiles.
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" ); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
@@ -57,21 +56,22 @@ git: ## Setup git
 	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"	
 
 
-node:
+node:  ## node version manager and latest nod
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 	$(HOME)/.nvm/nvm install node
 
 
-direnv:
+
+direnv: ## direnv
 	curl -sfL https://direnv.net/install.sh | bash
 
-aws:
+aws:  ## AWS CLI
 	npm install -g aws-cdk
 	curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 	sudo installer -pkg AWSCLIV2.pkg -target /
 
 
-make java:
+java:  # sdkman to manage java
 	sudo apt install unzip
 	curl -s "https://get.sdkman.io" | bash
 	( \
@@ -81,15 +81,15 @@ make java:
 	)
 
 
-tools:
+tools:  ## old school sysadmin
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
 
 
-misc:
+misc:  ## we need less cow bell
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
 
 
-python:
+python:  ## pyenv; you will need to complete outside make
 	sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
 	libbz2-dev libreadline-dev libsqlite3-dev curl git \
 	libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
@@ -97,13 +97,8 @@ python:
 	echo "restart shell..."
 
 
-rust:
+rust:  # rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-
-all:
-	$(MAKE) dotfiles
-	$(MAKE) $(VIMBUNDLE)
 
 
 .PHONY: help
