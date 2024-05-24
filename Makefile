@@ -35,6 +35,7 @@ nvim:
 	sudo install lazygit /usr/local/bin
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
+	cargo install fd-find
 
 dotfiles: ## Installs the dotfiles.
 	# add aliases for dotfiles
