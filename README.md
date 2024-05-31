@@ -2,18 +2,6 @@
 
 Mostly assembled from <https://github.com/jessfraz/dotfiles>
 
-## Ruby - PITA
-
-```yaml
-sudo apt update
-sudo apt install libyaml-dev
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-~/.rbenv/bin/rbenv init
-rbenv install 3.3.1
-rbenv global 3.3.1
-```
-
 ## Python
 
 ```yaml
