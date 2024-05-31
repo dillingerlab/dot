@@ -50,11 +50,11 @@ for file in ~/.{bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
 done
 unset file
 
-export EDITOR='vim'
+export EDITOR='nvim'
 HISTTIMEFORMAT="%F %T "
 export HIST_IGNORE_DUPS
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -71,3 +71,5 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(direnv hook bash)"
 
 eval "$(~/.rbenv/bin/rbenv init - bash)"
+
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
