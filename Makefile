@@ -81,6 +81,18 @@ java:  # sdkman to manage java
 	)
 
 
+ruby:  ## Ruby
+	sudo apt update
+	sudo apt install libyaml-dev
+	( \
+		git clone https://github.com/rbenv/rbenv.git $(HOME)/.rbenv; \
+		git clone https://github.com/rbenv/ruby-build.git $(HOME)/.rbenv/plugins/ruby-build; \
+		$(HOME)/.rbenv/bin/rbenv init; \
+		$(HOME)/.rbenv/bin/rbenv install 3.3.1; \
+		$(HOME)/.rbenv/bin/rbenv global 3.3.1; \
+	)
+
+
 tools:  ## old school sysadmin
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
 
