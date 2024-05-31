@@ -1,4 +1,17 @@
 #!/bin/bash
+#
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+	# shellcheck disable=SC2015
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	#alias ls='ls --color=auto'
+	alias dir='dir --color=auto'
+	alias vdir='vdir --color=auto'
+
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
+fi
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -13,9 +26,4 @@ alias sudo='sudo '
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Python
-alias pytree="tree -I '__pycache__|*~'"
-alias python=python3
-alias virm="find . -name '*~' -delete"
-alias pip=pip3
 alias vim=nvim
