@@ -104,11 +104,9 @@ wsl:  ## we need less cow bell
 
 
 python:  ## pyenv; you will need to complete outside make
-	sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
-	libbz2-dev libreadline-dev libsqlite3-dev curl git \
-	libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-	curl https://pyenv.run | bash
-	echo "restart shell..."
+	curl -sSf https://rye.astral.sh/get | bash
+	mkdir -p ~/.local/share/bash-completion/completions
+	$(HOME)/.rye/shims/rye self completion > ~/.local/share/bash-completion/completions/rye.bash
 
 
 rust:  # rustup; rust/cargo

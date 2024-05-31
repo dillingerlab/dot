@@ -43,12 +43,6 @@ export HIST_IGNORE_DUPS
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 source "$HOME/.cargo/env"
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-eval "$(pyenv virtualenv-init -)"
-
 export PATH="$PATH:/usr/bin/nvim-linux64/bin"
 
 export NVM_DIR="$HOME/.nvm"
@@ -60,3 +54,6 @@ eval "$(direnv hook bash)"
 eval "$(~/.rbenv/bin/rbenv init - bash)"
 
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+
+source "$HOME/.rye/env"
+source $HOME/.local/share/bash-completion/completions/rye.bash
