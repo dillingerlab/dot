@@ -4,7 +4,7 @@ SHELL := /bin/bash
 VIMBUNDLE=$(HOME)/.vim/bundle
 
 
-$(VIMBUNDLE): ## Setup Vim Theme
+$(VIMBUNDLE): ## Vim
 	touch $(HOME)/.viminfo
 	mkdir -p $(HOME)/.vim/undodir
 	mkdir -p $(HOME)/.vim/autoload
@@ -62,9 +62,9 @@ node:  ## node version manager and latest nod
 	$(HOME)/.nvm/nvm install node
 
 
-
 direnv: ## direnv
 	curl -sfL https://direnv.net/install.sh | bash
+
 
 aws:  ## AWS CLI
 	npm install -g aws-cdk
@@ -96,9 +96,10 @@ ruby:  ## Ruby
 
 tools:  ## old school sysadmin
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
+	$(MAKE) direnv
 
 
-misc:  ## we need less cow bell
+wsl:  ## we need less cow bell
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
 
 
