@@ -1,16 +1,14 @@
 #!/bin/bash
 
-# Load .bashrc and other files...
-for file in ~/.{bashrc,bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
+for file in ~/.{bashrc,bash_prompt,aliases,functions,path,exports}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-		# shellcheck source=/dev/null
 		source "$file"
 	fi
 done
 unset file
+#
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-parse_git_branch() {
-	git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-export PS1="\D{%H:%M} \w\$(parse_git_branch): "
+HISTTIMEFORMAT="%F %T "
+export HIST_IGNORE_DUPS

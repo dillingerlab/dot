@@ -1,25 +1,24 @@
-SHELL := /bin/bash
+SHELL := /bin/sh
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
+LAZYVIM_CONFIG=$(HOME)/.config/nvim/lua/config
 
 
-$(VIMBUNDLE): ## Vim
+$(VIMBUNDLE):
 	touch $(HOME)/.viminfo
 	mkdir -p $(HOME)/.vim/undodir
 	mkdir -p $(HOME)/.vim/autoload
 	mkdir -p $(HOME)/.vim/bundle
-	curl -LSso $(HOME)/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-	git clone https://github.com/dense-analysis/ale.git $(HOME)/.vim/bundle/ale;
-	git clone https://github.com/preservim/nerdtree.git $(HOME)/.vim/bundle/nerdtree;
 	cp -r $(CURDIR)/templates $(HOME)/.vim/;
 	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
 
 
-vim:  # vim
+vim:  ## vim
 	$(MAKE) $(VIMBUNDLE)
 
-nvim:  # Almost complete neovim + lazyvim
+
+nvim-linux64:  ## nvim-linux64
 	sudo apt install gcc
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 	sudo rm -rf /usr/bin/nvim
@@ -36,16 +35,45 @@ nvim:  # Almost complete neovim + lazyvim
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
 	cargo install fd-find
+	$(MAKE) $(LAZYVIM_CONFIG)
 
-dotfiles: ## dotfiles.
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" ); do \
+$(LAZYVIM_CONFIG):
+	mkdir -p $(LAZYVIM_CONFIG)
+	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(LAZYVIM_CONFIG)/$$f; \
+	done; \
+
+
+lazyvim_config:  ## lazyvim config
+	$(MAKE) $(LAZYVIM_CONFIG)
+
+
+nvim-mac:  ## nvim-mac
+	brew install neovim
+	git clone https://github.com/LazyVim/starter ~/.config/nvim
+	rm -rf ~/.config/nvim/.git
+	brew install jesseduffield/lazygit/lazygit
+	brew install ripgrep
+	git config --global core.editor nvim
+	cargo install fd-find
+
+
+dotfiles-linux64: ## dotfiles linux64
+	for file in $(shell find $(CURDIR) -name ".*" -not -name .git -not -name .zshrc -not -name .zsh_prompt -not -name .zprofile); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
-	ln -snf $(CURDIR)/.bash_profile $(HOME)/.profile
 
 
-git: ## Setup git
+dotfiles-mac: ## dotfiles mac.
+	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" -not -name ".bashrc" -not -name ".bash_prompt" -not -name ".bash_profile"); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(HOME)/$$f; \
+	done; \
+
+
+git: ## git
 	git config --global remote.origin.prune true
 	git config --global log.abbrevCommit true
 	git config --global core.abbrev 8
@@ -53,26 +81,23 @@ git: ## Setup git
 	git config --global init.defaultBranch main
 	git config --global push.autoSetupRemote true
 	git config --global advice.skippedCherryPicks false
-	git config --global help.autocorrect prompt 1
+	git config --global help.autocorrect immediate
 	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"	
+	git config --global rerere.enabled true
 
 
-node:  ## node version manager and latest nod
+node:  ## node
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 	$(HOME)/.nvm/nvm install node
 
 
-direnv: ## direnv
-	curl -sfL https://direnv.net/install.sh | bash
-
-
-aws:  ## AWS CLI
+aws:  ## aws cdk
 	npm install -g aws-cdk
 	curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 	sudo installer -pkg AWSCLIV2.pkg -target /
 
 
-java:  # sdkman to manage java
+java-linux64:  ## sdkman for java-linux64
 	sudo apt install unzip
 	curl -s "https://get.sdkman.io" | bash
 	( \
@@ -82,7 +107,16 @@ java:  # sdkman to manage java
 	)
 
 
-ruby:  ## Ruby
+java-mac:  ## sdkman for java - mac
+	curl -s "https://get.sdkman.io" | bash
+	( \
+		$(HOME)/.sdkman/bin/sdkman-init.sh; \
+		sdk install java 21.0.2-zulu; \
+		sdk use java 21.0.2; \
+	)
+
+
+ruby-linux:  ## ruby-linux
 	sudo apt update
 	sudo apt install libyaml-dev
 	( \
@@ -94,22 +128,38 @@ ruby:  ## Ruby
 	)
 
 
-tools:  ## old school sysadmin
+ruby-mac:  ## ruby - mac
+	brew install rbenv ruby-build
+	rbenv install 3.3.1
+	rbenv global 3.3.1
+
+
+tools-linux64:  ## tools-linux64
 	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
-	$(MAKE) direnv
-
-
-wsl:  ## we need less cow bell
+	curl -sfL https://direnv.net/install.sh | bash
 	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
 
 
-python:  ## pyenv; you will need to complete outside make
+tools-mac:  # tools-mac
+	brew install direnv jq yq direnv
+
+
+python:
 	curl -sSf https://rye.astral.sh/get | bash
+
+
+python-linux64:  ## rye-linux64
+	$(MAKE) python
 	mkdir -p ~/.local/share/bash-completion/completions
 	$(HOME)/.rye/shims/rye self completion > ~/.local/share/bash-completion/completions/rye.bash
 
 
-rust:  # rustup; rust/cargo
+python-mac:  ## rye - mac 
+	$(MAKE) python
+	# autocompletion
+
+
+rust:  ## rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 

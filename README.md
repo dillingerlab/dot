@@ -1,18 +1,21 @@
 # Machine Setup
 
-Mostly assembled from <https://github.com/jessfraz/dotfiles>
+Started from: <https://github.com/jessfraz/dotfiles>
 
-## Python
+## Windows
 
-```yaml
-pyenv install 3.12.3
-pyenv global 3.12.3
-```
-
-## Docker
+### Docker
 
 - Docker for Desktop
 
-## Windows Improvements
+### Keyboard Improvements
 
 - [Map Caps Lock to Right Control Key](https://superuser.com/questions/949385/map-capslock-to-control-in-windows-10)
+
+## Mac
+
+use zsh
+install homebrew
+install iterm2
+
+- [Map Caps Lock to Control Key](https://stackoverflow.com/questions/20146972/is-there-a-way-to-make-alt-f-and-alt-b-jump-word-forward-and-backward-instead-of)
