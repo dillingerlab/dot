@@ -68,8 +68,9 @@ git: ## git
 	git config --global init.defaultBranch main
 	git config --global push.autoSetupRemote true
 	git config --global advice.skippedCherryPicks false
-	git config --global help.autocorrect prompt 1
+	git config --global help.autocorrect immediate
 	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"	
+	git config --global rerere.enabled true
 
 
 node:  ## node
