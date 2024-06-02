@@ -19,3 +19,22 @@ install homebrew
 install iterm2
 
 - [Map Caps Lock to Control Key](https://stackoverflow.com/questions/20146972/is-there-a-way-to-make-alt-f-and-alt-b-jump-word-forward-and-backward-instead-of)
+
+## `nvim`
+
+### lua/config/options.lua
+
+```lua
+vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff_lsp"
+```
+
+### lua/config/keymaps.lua
+
+```lua
+vim.keymap.set("n", "h", ";")
+vim.keymap.set("n", "j", "h")
+vim.keymap.set("n", "k", "j")
+vim.keymap.set("n", "l", "k")
+vim.keymap.set("n", ";", "l")
+```
