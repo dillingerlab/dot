@@ -2,6 +2,7 @@ SHELL := /bin/sh
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
+LAZYVIM_CONFIG=$(HOME)/.config/nvim/lua/config
 
 
 $(VIMBUNDLE):
@@ -34,6 +35,18 @@ nvim-linux64:  ## nvim-linux64
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
 	cargo install fd-find
+	$(MAKE) $(LAZYVIM_CONFIG)
+
+$(LAZYVIM_CONFIG):
+	mkdir -p $(LAZYVIM_CONFIG)
+	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(LAZYVIM_CONFIG)/$$f; \
+	done; \
+
+
+lazyvim_config:  ## lazyvim config
+	$(MAKE) $(LAZYVIM_CONFIG)
 
 
 nvim-mac:  ## nvim-mac
