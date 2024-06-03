@@ -45,7 +45,7 @@ $(LAZYVIM_CONFIG):
 	done; \
 
 
-lazyvim_config:  ## lazyvim config
+lazyvim-config:  ## lazyvim config
 	$(MAKE) $(LAZYVIM_CONFIG)
 
 
@@ -146,6 +146,7 @@ tools-mac:  # tools-mac
 
 python:
 	curl -sSf https://rye.astral.sh/get | bash
+	$(HOME)/.rye/shims/rye config --set-bool behavior.global-python=true
 
 
 python-linux64:  ## rye-linux64
@@ -156,7 +157,6 @@ python-linux64:  ## rye-linux64
 
 python-mac:  ## rye - mac 
 	$(MAKE) python
-	# autocompletion
 
 
 rust:  ## rustup; rust/cargo

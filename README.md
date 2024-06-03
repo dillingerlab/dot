@@ -2,6 +2,10 @@
 
 Started from: <https://github.com/jessfraz/dotfiles>
 
+## Getting Started
+
+Check the recipes available via `make help`
+
 ## Windows
 
 ### Docker
