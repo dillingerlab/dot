@@ -1,4 +1,4 @@
-SHELL := /bin/sh
+SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
@@ -117,7 +117,7 @@ java-mac:  ## sdkman for java - mac
 
 ruby-linux:  ## ruby-linux
 	sudo apt update
-	sudo apt install libyaml-dev
+	sudo apt install libyaml-dev libz-dev libssl-dev
 	( \
 		git clone https://github.com/rbenv/rbenv.git $(HOME)/.rbenv; \
 		git clone https://github.com/rbenv/ruby-build.git $(HOME)/.rbenv/plugins/ruby-build; \
