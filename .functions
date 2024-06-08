@@ -26,3 +26,8 @@ v() {
 		nvim "$@"
 	fi
 }
+
+pgit() {
+	git config --global user.name "Austin"
+	git config --global user.email "shuffletick@gmail.com"
+}
