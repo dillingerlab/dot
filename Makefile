@@ -18,6 +18,14 @@ vim:  ## vim
 	$(MAKE) $(VIMBUNDLE)
 
 
+$(LAZYVIM_CONFIG):
+	mkdir -p $(LAZYVIM_CONFIG)
+	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(LAZYVIM_CONFIG)/$$f; \
+	done; \
+
+
 nvim-linux64:  ## nvim-linux64
 	sudo apt install gcc
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
@@ -37,15 +45,8 @@ nvim-linux64:  ## nvim-linux64
 	cargo install fd-find
 	$(MAKE) $(LAZYVIM_CONFIG)
 
-$(LAZYVIM_CONFIG):
-	mkdir -p $(LAZYVIM_CONFIG)
-	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(LAZYVIM_CONFIG)/$$f; \
-	done; \
 
-
-lazyvim-config:  ## lazyvim config
+lazyvim-config:
 	$(MAKE) $(LAZYVIM_CONFIG)
 
 
@@ -57,6 +58,7 @@ nvim-mac:  ## nvim-mac
 	brew install ripgrep
 	git config --global core.editor nvim
 	cargo install fd-find
+	$(MAKE) $(LAZYVIM_CONFIG)
 
 
 dotfiles-linux64: ## dotfiles linux64
