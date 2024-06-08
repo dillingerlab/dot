@@ -33,6 +33,7 @@ nvim-linux64:  ## nvim-linux64
 	sudo install lazygit /usr/local/bin
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
+	$(MAKE) rust
 	cargo install fd-find
 	$(MAKE) $(LAZYVIM_CONFIG)
 
