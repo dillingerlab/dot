@@ -23,3 +23,5 @@ install homebrew
 install iterm2
 
 - [Map Caps Lock to Control Key](https://stackoverflow.com/questions/20146972/is-there-a-way-to-make-alt-f-and-alt-b-jump-word-forward-and-backward-instead-of)
+
+## Git Cred Manager
