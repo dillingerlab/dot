@@ -32,13 +32,13 @@ nvim-linux64:  ## nvim-linux64
 	rm -rf $(CURDIR)/nvim-linux64.tar.gz
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
 	rm -rf ~/.config/nvim/.git
+	sudo install lazygit /usr/local/bin
 	( \
 		curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_0.42.0_Linux_x86_64.tar.gz"; \
 		tar xf lazygit.tar.gz lazygit; \
 	)
 	rm $(CURDIR)/lazygit
 	rm $(CURDIR)/lazygit.tar.gz
-	sudo install lazygit /usr/local/bin
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
 	$(MAKE) rust
@@ -55,15 +55,19 @@ nvim-mac:  ## nvim-mac
 	cargo install fd-find
 
 
-dotfiles-linux64: ## dotfiles linux64
-	for file in $(shell find $(CURDIR) -name ".*" -not -name .git -not -name .zshrc -not -name .zsh_prompt -not -name .zprofile); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(HOME)/$$f; \
-	done; \
+# dotfiles-linux64: ## dotfiles linux64
+# 	for file in $(shell find $(CURDIR) -name ".*" -not -name .git -not -name .zshrc -not -name .zsh_prompt -not -name .zprofile); do \
+# 		f=$$(basename $$file); \
+# 		ln -sfn $$file $(HOME)/$$f; \
+# 	done; \
 
 
-dotfiles-mac: ## dotfiles mac.
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" -not -name ".bashrc" -not -name ".bash_prompt" -not -name ".bash_profile"); do \
+zsh:
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+dotfiles: ## dotfiles mac.
+	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" ); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
@@ -185,7 +189,8 @@ python-linux64:  ## rye-linux64
 
 rust:  ## rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
+	mkdir ~/.zfunc/
+	rustup completions zsh cargo > ~/.zfunc/_cargo
 
 .PHONY: help
 help:

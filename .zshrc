@@ -6,26 +6,75 @@ case $- in
   *) return;;
 esac
 
+# Load .bashrc and other files...
+for file in ~/.{functions,exports,aliases}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		source "$file"
+	fi
+done
+unset file
+
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
+HISTTIMEFORMAT="%F %T "
+
+
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt ALWAYS_TO_END
+setopt EXTENDED_HISTORY
+setopt AUTO_CD
 setopt PROMPT_SUBST
+setopt HIST_IGNORE_DUPS
 
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+source "$HOME/.rye/env"
 
-parse_git_branch() {
-	git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-export PS1="%D{%H:%M:%S} %1~\$(parse_git_branch) %(?.√.?%?) "
-
-# Node/NPM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-
-# mac
-export HOMEBREW_PREFIX="/opt/homebrew"
-export HOMEBREW_CELLAR="/opt/homebrew/cellar"
-export HOMEBREW_REPOSITORY="/opt/homebrew"
-export PATH="/opt/homebrew/bin:opt/homebrew/sbin${PATH+:$PATH}"
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
-export PATH=/usr/local/bin:$PATH
+export PATH="$PATH:/usr/bin/nvim-linux64/bin"
 eval "$(direnv hook zsh)"
+eval "$(~/.rbenv/bin/rbenv init - zsh)"
+eval "$(rye self completion -s zsh)"
+source $ZSH/oh-my-zsh.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
+export EDITOR='nvim'
+
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export SDKMAN_DIR="$HOME/.sdkman"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+export MANPATH="/usr/local/man:$MANPATH"
+
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
