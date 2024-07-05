@@ -72,6 +72,10 @@ dotfiles: ## dotfiles mac.
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
 
+tmux:
+	gem install tmuxinator
+	wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.zfunc/_tmuxinator
+
 
 git-personal:
 	git config --global user.name "Austin"
