@@ -55,18 +55,8 @@ nvim-mac:  ## nvim-mac
 	cargo install fd-find
 
 
-# dotfiles-linux64: ## dotfiles linux64
-# 	for file in $(shell find $(CURDIR) -name ".*" -not -name .git -not -name .zshrc -not -name .zsh_prompt -not -name .zprofile); do \
-# 		f=$$(basename $$file); \
-# 		ln -sfn $$file $(HOME)/$$f; \
-# 	done; \
-
-
-zsh:
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-
 dotfiles: ## dotfiles mac.
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" ); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
@@ -74,6 +64,7 @@ dotfiles: ## dotfiles mac.
 
 tmux:
 	gem install tmuxinator
+	mkdir -p $(HOME)/.zfunc/
 	wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.zfunc/_tmuxinator
 
 
@@ -193,7 +184,7 @@ python-linux64:  ## rye-linux64
 
 rust:  ## rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	mkdir ~/.zfunc/
+	mkdir -p $(HOME)/.zfunc/
 	rustup completions zsh cargo > ~/.zfunc/_cargo
 
 .PHONY: help
