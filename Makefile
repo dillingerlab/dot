@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /bin/zsh
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
@@ -61,16 +61,6 @@ dotfiles: ## dotfiles mac.
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
-
-tmux:
-	gem install tmuxinator
-	mkdir -p $(HOME)/.zfunc/
-	wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.zfunc/_tmuxinator
-
-
-git-personal:
-	git config --global user.name "Austin"
-	git config --global user.email "shuffletick@gmail.com"
 
 
 git: ## git
@@ -147,9 +137,12 @@ tools-linux64:  ## tools-linux64
 	sudo apt install dos2unix shellcheck httpie tmux shellcheck zip direnv
 	sudo apt install xclip xsel		
 	$(MAKE) ruby-linux
-	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
+	gem install tmuxinator
+	mkdir -p $(HOME)/.zfunc/
+	wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.zfunc/_tmuxinator
 
-popos-core:
+
+popos-core:  ## POPOS
 	sudo apt install \
 	build-essential \
 	apt-transport-https \
@@ -167,25 +160,23 @@ popos-core:
 	sudo reboot now;
 	sudo apt install gnome-tweaks;
 
+
 tools-mac:  # tools-mac
 	brew install direnv jq yq direnv
 	brew install tmux
+	brew install tmuxinator
 
 
-python:
+python:  ## Python
 	curl -sSf https://rye.astral.sh/get | bash
 	$(HOME)/.rye/shims/rye config --set-bool behavior.global-python=true
 
-
-python-linux64:  ## rye-linux64
-	$(MAKE) python
-	mkdir -p ~/.local/share/bash-completion/completions
-	$(HOME)/.rye/shims/rye self completion > ~/.local/share/bash-completion/completions/rye.bash
 
 rust:  ## rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 	mkdir -p $(HOME)/.zfunc/
 	rustup completions zsh cargo > ~/.zfunc/_cargo
+
 
 .PHONY: help
 help:

@@ -38,7 +38,7 @@ source "$HOME/.rye/env"
 export PATH="$PATH:/usr/bin/nvim-linux64/bin"
 eval "$(direnv hook zsh)"
 eval "$(~/.rbenv/bin/rbenv init - zsh)"
-eval "$(rye self completion -s zsh)"
+eval "$(~/.rye/shims/rye self completion -s zsh)"
 source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="$HOME/.nvm"
