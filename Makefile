@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /bin/zsh
 .DEFAULT_GOAL := help
 
 VIMBUNDLE=$(HOME)/.vim/bundle
@@ -18,11 +18,9 @@ vim:  ## vim
 	$(MAKE) $(VIMBUNDLE)
 
 
-$(LAZYVIM_CONFIG):
-	mkdir -p $(LAZYVIM_CONFIG)
+lazy_nvim:
 	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(LAZYVIM_CONFIG)/$$f; \
+		cp $$file $(LAZYVIM_CONFIG)/; \
 	done; \
 
 
@@ -34,20 +32,17 @@ nvim-linux64:  ## nvim-linux64
 	rm -rf $(CURDIR)/nvim-linux64.tar.gz
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
 	rm -rf ~/.config/nvim/.git
+	sudo install lazygit /usr/local/bin
 	( \
 		curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_0.42.0_Linux_x86_64.tar.gz"; \
 		tar xf lazygit.tar.gz lazygit; \
 	)
-	sudo install lazygit /usr/local/bin
+	rm $(CURDIR)/lazygit
+	rm $(CURDIR)/lazygit.tar.gz
 	sudo apt-get install ripgrep
 	git config --global core.editor nvim
 	$(MAKE) rust
 	cargo install fd-find
-	$(MAKE) $(LAZYVIM_CONFIG)
-
-
-lazyvim-config:
-	$(MAKE) $(LAZYVIM_CONFIG)
 
 
 nvim-mac:  ## nvim-mac
@@ -58,24 +53,26 @@ nvim-mac:  ## nvim-mac
 	brew install ripgrep
 	git config --global core.editor nvim
 	cargo install fd-find
-	$(MAKE) $(LAZYVIM_CONFIG)
 
 
-dotfiles-linux64: ## dotfiles linux64
-	for file in $(shell find $(CURDIR) -name ".*" -not -name .git -not -name .zshrc -not -name .zsh_prompt -not -name .zprofile); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(HOME)/$$f; \
-	done; \
-
-
-dotfiles-mac: ## dotfiles mac.
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" -not -name ".bashrc" -not -name ".bash_prompt" -not -name ".bash_profile"); do \
+dotfiles: ## dotfiles mac.
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" ); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
 
 
 git: ## git
+	curl -Lo gcm.tar.gz "https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.5.0/gcm-linux_amd64.2.5.0.tar.gz"
+	tar xf gcm.tar.gz git-credential-manager
+	sudo install git-credential-manager /usr/local/bin
+	rm $(CURDIR)/gcm.tar.gz
+	rm -rf $(CURDIR)/git-credential-manager
+	git-credential-manager configure
+	sudo apt-get install pass
+	gpg --full-generate-key
+	pass init `gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $2}' | sed  's/rsa3072\///g'`
 	git config --global remote.origin.prune true
 	git config --global log.abbrevCommit true
 	git config --global core.abbrev 8
@@ -84,13 +81,13 @@ git: ## git
 	git config --global push.autoSetupRemote true
 	git config --global advice.skippedCherryPicks false
 	git config --global help.autocorrect immediate
-	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"	
 	git config --global rerere.enabled true
+	git config --global credential.credentialStore gpg
 
 
 node:  ## node
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-	$(HOME)/.nvm/nvm install node
+	#$(HOME)/.nvm/nvm install node
 
 
 aws:  ## aws cdk
@@ -137,32 +134,48 @@ ruby-mac:  ## ruby - mac
 
 
 tools-linux64:  ## tools-linux64
-	sudo apt install dos2unix tree shellcheck httpie tmux shellcheck zip
-	curl -sfL https://direnv.net/install.sh | bash
-	sudo sed -i 's/# set bell-style none/set bell-style none/' /etc/inputrc
+	sudo apt install dos2unix shellcheck httpie tmux shellcheck zip direnv
+	sudo apt install xclip xsel		
+	$(MAKE) ruby-linux
+	gem install tmuxinator
+	mkdir -p $(HOME)/.zfunc/
+	wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.zfunc/_tmuxinator
+
+
+popos-core:  ## POPOS
+	sudo apt install \
+	build-essential \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	software-properties-common \
+	apache2-utils \
+	make \
+	chromium-browser \
+	gnome-tweaks \
+	gnome-shell-extensions \
+	dconf-editor;
+	sudo apt autoremove -y;
+	sudo apt autoclean -y;
+	sudo reboot now;
+	sudo apt install gnome-tweaks;
 
 
 tools-mac:  # tools-mac
 	brew install direnv jq yq direnv
+	brew install tmux
+	brew install tmuxinator
 
 
-python:
+python:  ## Python
 	curl -sSf https://rye.astral.sh/get | bash
 	$(HOME)/.rye/shims/rye config --set-bool behavior.global-python=true
 
 
-python-linux64:  ## rye-linux64
-	$(MAKE) python
-	mkdir -p ~/.local/share/bash-completion/completions
-	$(HOME)/.rye/shims/rye self completion > ~/.local/share/bash-completion/completions/rye.bash
-
-
-python-mac:  ## rye - mac 
-	$(MAKE) python
-
-
 rust:  ## rustup; rust/cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	mkdir -p $(HOME)/.zfunc/
+	rustup completions zsh cargo > ~/.zfunc/_cargo
 
 
 .PHONY: help

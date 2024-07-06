@@ -2,11 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- This is too basic for the lazyvim env.
--- Better to switch finger postion between
--- hjkl (n) and jkl; (typing)
---vim.keymap.set("n", "h", ";")
---vim.keymap.set("n", "j", "h")
---vim.keymap.set("n", "k", "j")
---vim.keymap.set("n", "l", "k")
---vim.keymap.set("n", ";", "l")
+-- greatest remap ever - Prime
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
