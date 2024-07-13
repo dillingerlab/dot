@@ -36,7 +36,6 @@ setopt HIST_IGNORE_DUPS
 source "$HOME/.rye/env"
 
 export PATH="$PATH:/usr/bin/nvim-linux64/bin"
-eval "$(direnv hook zsh)"
 eval "$(~/.rbenv/bin/rbenv init - zsh)"
 eval "$(~/.rye/shims/rye self completion -s zsh)"
 source $ZSH/oh-my-zsh.sh
@@ -49,6 +48,8 @@ export EDITOR='nvim'
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export SDKMAN_DIR="$HOME/.sdkman"
+eval "$(direnv hook zsh)"
+eval "$(atlas completion zsh)"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
