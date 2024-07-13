@@ -1,3 +1,5 @@
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 alias mux=tmuxinator
+alias tf=terraform
+alias sqlite3='python -m sqlite3'
