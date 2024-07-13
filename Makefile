@@ -83,6 +83,8 @@ git: ## git
 	git config --global help.autocorrect immediate
 	git config --global rerere.enabled true
 	git config --global credential.credentialStore gpg
+	mkdir -p $(HOME)/.config/git
+	ln -sfn $(CURDIR)/gitignore $(HOME)/.config/git/ignore
 
 
 node:  ## node
