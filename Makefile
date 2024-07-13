@@ -135,6 +135,10 @@ ruby-mac:  ## ruby - mac
 	rbenv global 3.3.1
 
 
+db-tools:
+	sh -c "$$( curl -sSf https://atlasgo.sh )" -y
+
+
 tools-linux64:  ## tools-linux64
 	sudo apt install dos2unix shellcheck httpie tmux shellcheck zip direnv
 	sudo apt install xclip xsel		
