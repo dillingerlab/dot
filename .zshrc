@@ -23,13 +23,6 @@ autoload -Uz compinit && compinit
 HISTTIMEFORMAT="%F %T "
 
 
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt ALWAYS_TO_END
-setopt EXTENDED_HISTORY
-setopt AUTO_CD
-setopt PROMPT_SUBST
-setopt HIST_IGNORE_DUPS
 
 . "$HOME/.cargo/env"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -69,6 +62,14 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 export MANPATH="/usr/local/man:$MANPATH"
 
 export LANG=en_US.UTF-8
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt ALWAYS_TO_END
+setopt EXTENDED_HISTORY
+setopt AUTO_CD
+setopt PROMPT_SUBST
+setopt HIST_IGNORE_DUPS
+setopt DVORAK
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
