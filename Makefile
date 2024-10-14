@@ -1,28 +1,6 @@
 SHELL := /bin/zsh
 .DEFAULT_GOAL := help
 
-VIMBUNDLE=$(HOME)/.vim/bundle
-LAZYVIM_CONFIG=$(HOME)/.config/nvim/lua/config
-
-
-$(VIMBUNDLE):
-	touch $(HOME)/.viminfo
-	mkdir -p $(HOME)/.vim/undodir
-	mkdir -p $(HOME)/.vim/autoload
-	mkdir -p $(HOME)/.vim/bundle
-	cp -r $(CURDIR)/templates $(HOME)/.vim/;
-	ln -sfn $(CURDIR)/.vimrc $(HOME)/.vimrc;
-
-
-vim:  ## vim
-	$(MAKE) $(VIMBUNDLE)
-
-
-lazy_nvim:
-	for file in $(shell find $(CURDIR)/nvim -name "*.lua"); do \
-		cp $$file $(LAZYVIM_CONFIG)/; \
-	done; \
-
 
 nvim-linux64:  ## nvim-linux64
 	sudo apt install gcc
@@ -30,8 +8,7 @@ nvim-linux64:  ## nvim-linux64
 	sudo rm -rf /usr/bin/nvim
 	sudo tar -C /usr/bin -xzf nvim-linux64.tar.gz
 	rm -rf $(CURDIR)/nvim-linux64.tar.gz
-	git clone https://github.com/LazyVim/starter ~/.config/nvim
-	rm -rf ~/.config/nvim/.git
+	git clone https://github.com/dillingerlab/kickstart.nvim.git $(HOME)/.config/nvim
 	sudo install lazygit /usr/local/bin
 	( \
 		curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_0.42.0_Linux_x86_64.tar.gz"; \
@@ -47,7 +24,8 @@ nvim-linux64:  ## nvim-linux64
 
 nvim-mac:  ## nvim-mac
 	brew install neovim
-	git clone https://github.com/LazyVim/starter ~/.config/nvim
+	git clone https://github.com/dillingerlab/kickstart.nvim.git $(HOME)/.config/nvim
+	rm -rf ~/.config/nvim/.git
 	rm -rf ~/.config/nvim/.git
 	brew install jesseduffield/lazygit/lazygit
 	brew install ripgrep
