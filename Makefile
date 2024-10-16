@@ -20,6 +20,8 @@ nvim-linux64:  ## nvim-linux64
 	git config --global core.editor nvim
 	$(MAKE) rust
 	cargo install fd-find
+	$(MAKE) python
+	rye install ruff-lsp
 
 
 nvim-mac:  ## nvim-mac
