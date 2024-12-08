@@ -53,6 +53,8 @@ git: ## git
 	sudo apt-get install pass
 	gpg --full-generate-key
 	pass init `gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $2}' | sed  's/rsa3072\///g'`
+
+git-config:
 	git config --global remote.origin.prune true
 	git config --global log.abbrevCommit true
 	git config --global core.abbrev 8
