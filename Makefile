@@ -67,6 +67,15 @@ git: ## git
 	ln -sfn $(CURDIR)/gitignore $(HOME)/.config/git/ignore
 
 
+go:
+	curl -Lo go.tar.gz "https://golang.org/dl/go1.22.5.linux-amd64.tar.gz"
+	tar xf go.tar.gz go
+	sudo chown -R root:root $(CURDIR)/go
+	sudo mv $(CURDIR)/go /usr/local
+	rm $(CURDIR)/go.tar.gz
+	rm -rf $(CURDIR)/git-credential-manager
+
+
 node:  ## node
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 	#$(HOME)/.nvm/nvm install node

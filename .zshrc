@@ -43,7 +43,8 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export SDKMAN_DIR="$HOME/.sdkman"
 eval "$(direnv hook zsh)"
 eval "$(atlas completion zsh)"
-
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
