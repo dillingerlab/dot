@@ -154,7 +154,6 @@ ruby-mac:  ## ruby - mac
 
 
 db-tools:
-	# sh -c "$$( curl -sSf https://atlasgo.sh )" -y
 	curl "https://www.sqlite.org/2024/sqlite-tools-linux-x64-3460000.zip" -o "sqlite.zip"
 	unzip sqlite.zip -d $(HOME)/.local/bin/
 	rm sqlite.zip
