@@ -44,7 +44,7 @@ dotfiles: ## dotfiles mac.
 
 
 git: ## git
-	curl -Lo gcm.tar.gz "https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.5.0/gcm-linux_amd64.2.5.0.tar.gz"
+	curl -Lo gcm.tar.gz "https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.6.1/gcm-linux_amd64.2.6.1.tar.gz"
 	tar xf gcm.tar.gz git-credential-manager
 	sudo install git-credential-manager /usr/local/bin
 	rm $(CURDIR)/gcm.tar.gz
