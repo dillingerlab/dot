@@ -56,8 +56,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
